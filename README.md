@@ -68,11 +68,6 @@ lstm_lstm_stock_project/
    streamlit run streamlit_app.py
    ```
 
-## Streamlit Cloud (Optional Deployment)
-- Push this folder to a public GitHub repo.
-- Go to https://share.streamlit.io/ and connect your repo.
-- Set the entrypoint as `streamlit_app.py`.
-- After deploy, you'll get a public URL you can share.
 
 ## Notes
 - The model predicts **next-day close** using a rolling window (default 60 days) of features.
