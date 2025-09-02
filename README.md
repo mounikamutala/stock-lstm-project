@@ -28,83 +28,61 @@ lstm-stock-price-forecasting/
 │── README.md                      # Project documentation
 │── model/                         # (Optional) Saved LSTM model weights
 
-🔹 Workflow
-1️⃣ Data Collection
+# Stock Price Trend Prediction with LSTM
 
-Historical stock data fetched via Yahoo Finance API (yfinance).
+End-to-end project to forecast stock closing prices using Keras LSTM with indicators (SMA, RSI).
 
-User can select any ticker (e.g., AAPL, MSFT, TSLA, TCS.NS).
+## Project Structure
+```
+lstm_lstm_stock_project/
+├─ lstm_stock_forecasting.ipynb   # Step-by-step notebook
+├─ streamlit_app.py               # Optional Streamlit dashboard
+├─ artifacts/                     # Saved model, weights, predictions (created at runtime)
+├─ graphs/                        # Saved plots (created at runtime)
+└─ requirements.txt
+```
 
-2️⃣ Data Preprocessing
+## Quickstart (Local)
+1. **Create & activate a virtual env (recommended)**
+   ```bash
+   python -m venv .venv
+   # Windows
+   .venv\Scripts\activate
+   # macOS/Linux
+   source .venv/bin/activate
+   ```
 
-Closing price normalized (MinMaxScaler).
+2. **Install dependencies**
+   ```bash
+   pip install --upgrade pip
+   pip install -r requirements.txt
+   ```
 
-Time-series sequences prepared with lookback window.
+3. **Run the notebook**
+   - Open `lstm_stock_forecasting.ipynb` in Jupyter/VS Code.
+   - Set your `TICKER` (e.g., `AAPL` or `TCS.NS`) and run all cells.
+   - Artifacts will be saved under `artifacts/` and plots under `graphs/`.
 
-Train-test split applied.
+4. **Run the Streamlit dashboard (optional)**
+   ```bash
+   streamlit run streamlit_app.py
+   ```
 
-3️⃣ Feature Engineering
+## Streamlit Cloud (Optional Deployment)
+- Push this folder to a public GitHub repo.
+- Go to https://share.streamlit.io/ and connect your repo.
+- Set the entrypoint as `streamlit_app.py`.
+- After deploy, you'll get a public URL you can share.
 
-Added Technical Indicators:
+## Notes
+- The model predicts **next-day close** using a rolling window (default 60 days) of features.
+- Try increasing `EPOCHS` and `LOOKBACK` for improved results.
+- RSI and SMAs are included as features to provide trend & momentum context.
+- Make sure your ticker is correct (e.g., NSE tickers like `TCS.NS`).
 
-Simple Moving Average (SMA)
+## Requirements
+See `requirements.txt` for exact packages/versions.
 
-Relative Strength Index (RSI)
-
-4️⃣ Model Building
-
-LSTM network with:
-
-Input → LSTM(50 units) → Dropout → Dense → Output layer
-
-Optimizer: Adam
-
-Loss: MSE
-
-5️⃣ Training & Validation
-
-Hyperparameters configurable:
-
-Lookback window (30–120 days)
-
-Train-test ratio
-
-Epochs
-
-Batch size
-
-6️⃣ Evaluation Metrics
-
-RMSE (Root Mean Squared Error)
-
-MAE (Mean Absolute Error)
-
-MAPE (Mean Absolute Percentage Error)
-
-7️⃣ Visualization
-
-Plot of Actual vs Predicted Close Price
-
-Metrics displayed in Streamlit app
-
-🔹 Results
-
-Example with AAPL (Apple Inc.):
-
-RMSE: ~20.28
-
-MAE: ~17.51
-
-MAPE: ~8.06%
-
-📊 The predictions follow the stock price trend, though with smoother curves (due to lookback window & noise reduction).
-
-▶️ Usage
-Run Jupyter Notebook (for training & evaluation)
-jupyter notebook lstm_stock_forecasting.ipynb
-
-Run Streamlit Dashboard
-streamlit run streamlit_app.py
 
 📊 Features
 
